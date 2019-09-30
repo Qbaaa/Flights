@@ -1,1 +1,31 @@
-<p>airport works!</p>
+<form [formGroup]="airportForm" (ngSubmit)="onSubmit()">
+
+    <p>Dodawanie lotniska:</p>
+
+    <div class="form-group">
+      <label >Nazwa lotniska:</label>
+      <input type="text" class="form-control" formControlName="nameAirport" [ngClass]="{ 'is-invalid':submitted && f.nameAirport.errors }" />
+      <div *ngIf="f.nameAirport.errors" class="invalid-feedback">
+        <div *ngIf="f.nameAirport.errors.required">Nazwa lotniska jest pusta</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Kraj:</label>
+      <input type="text" class="form-control" formControlName="nameCountry" />
+    </div>
+
+    <div class="form-group">
+      <button class="btn btn-primary">Dodaj lotnisko </button>
+    </div>
+
+</form>
+
+<div class="form-group">
+  <a routerLink="/"> Powtrot do strony głównej </a>
+</div>
+
+
+
+
+
