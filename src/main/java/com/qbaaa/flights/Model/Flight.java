@@ -6,6 +6,7 @@ import java.time.LocalTime;
 
 @Inheritance(strategy= InheritanceType.TABLE_PER_CLASS)
 @Entity
+@Table(name = "flights")
 public abstract class Flight
 {
 

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
+import {Addairport} from "../class/addairport";
+import {FlightsService} from "../flights.service"
 
 @Component({
   selector: 'app-airport',
@@ -10,8 +12,11 @@ export class AirportComponent implements OnInit {
 
   airportForm: FormGroup;
   submitted = false;
+  addAirport: Addairport;
+  message: string;
+  messageIs: boolean;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private flightService: FlightsService) { }
 
   ngOnInit() {
     this.airportForm = this.fb.group({
@@ -30,7 +35,17 @@ export class AirportComponent implements OnInit {
       return;
     }
 
-    document.write("Wiww");
+    this.addAirport = this.airportForm.value;
+    this.flightService.addAirport(this.addAirport).subscribe(
+      data =>{
+        this.messageIs = true;
+        this.message = data;
+      },
+      error1 => {
+        this.messageIs = false;
+        this.message = error1;
+      }
+    );
 
   }
 

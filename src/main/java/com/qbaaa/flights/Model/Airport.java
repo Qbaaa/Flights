@@ -12,6 +12,14 @@ public class Airport
     public String name;
     public String nameCountry;
 
+    public String getName() {
+        return name;
+    }
+
+    public String getNameCountry() {
+        return nameCountry;
+    }
+
     public long getId() {
         return id;
     }

@@ -1,5 +1,14 @@
-<form [formGroup]="airportForm" (ngSubmit)="onSubmit()">
 
+<div *ngIf="submitted && messageIs " class="alert alert-success">
+  {{message}}
+</div>
+
+<div *ngIf="submitted && messageIs === false" class="alert alert-danger">
+  {{message}}
+</div>
+
+
+<form [formGroup]="airportForm" (ngSubmit)="onSubmit()">
     <p>Dodawanie lotniska:</p>
 
     <div class="form-group">
