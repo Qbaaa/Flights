@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Addairport} from "./class/addairport";
+import {ResponseMessage} from "./class/ResponseMessage";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -16,9 +17,9 @@ export class FlightsService {
 
   constructor(private http: HttpClient) { }
 
-  addAirport(addAirport: Addairport) : Observable<string>
+  addAirport(addAirport: Addairport) : Observable<ResponseMessage>
   {
-   return this.http.post<string>(this.airportUrl, addAirport , httpOptions);
+   return this.http.post<ResponseMessage>(this.airportUrl, addAirport , httpOptions);
   }
 
 }

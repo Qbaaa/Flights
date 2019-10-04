@@ -3,6 +3,7 @@ package com.qbaaa.flights.Controller;
 
 import com.qbaaa.flights.Model.Airport;
 import com.qbaaa.flights.Repository.AirportRepository;
+import com.qbaaa.flights.Response.MessageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,13 +22,13 @@ public class QuestionFlightController
     @PostMapping("/addAirport")
     public ResponseEntity<?> addAirport(@RequestBody Airport addAirport)
     {
-        if(airportRepository.existsByName(addAirport.name) && airportRepository.existsByNameCountry(addAirport.nameCountry))
+        if(airportRepository.existsByName(addAirport.getName()) && airportRepository.existsByNameCountry(addAirport.getNameCountry()))
         {
-            return new ResponseEntity<>("Już jest w bazie dane lotnisko" + addAirport.toString() , HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new MessageResponse("Już jest w bazie dane lotnisko " + addAirport.toString()) , HttpStatus.BAD_REQUEST);
         }
 
         airportRepository.save(addAirport);
 
-        return new ResponseEntity<>("Dodano pomyslnie lotnisko" , HttpStatus.OK);
+        return new ResponseEntity<>( new MessageResponse("Dodano pomyslnie lotnisko ") , HttpStatus.OK);
     }
 }

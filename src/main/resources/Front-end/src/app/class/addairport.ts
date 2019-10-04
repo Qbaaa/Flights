@@ -1,6 +1,7 @@
 export class Addairport {
-  nameAirport: string;
+  name: string;
   nameCountry: string;
+
 
 }
 
