@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
-import {Addairport} from "../class/addairport";
+import {Airport} from "../class/airport";
 import {FlightsService} from "../flights.service"
 
 @Component({
@@ -12,7 +12,7 @@ export class AirportComponent implements OnInit {
 
   airportForm: FormGroup;
   submitted = false;
-  addAirport: Addairport;
+  addAirport: Airport;
   message: any;
   messageIs: boolean;
 

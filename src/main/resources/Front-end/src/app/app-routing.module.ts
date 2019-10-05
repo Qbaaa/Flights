@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {AirportComponent} from "./airport/airport.component";
+import {DeleteairportComponent} from "./deleteairport/deleteairport.component";
 
 const routes: Routes = [
   {
@@ -11,7 +12,11 @@ const routes: Routes = [
     path: '',
     redirectTo: '',
     pathMatch: 'full'
-  }
+  },
+  {
+    path: 'deleteairport',
+    component: DeleteairportComponent
+  },
 ];
 
 @NgModule({

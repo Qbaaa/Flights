@@ -1,0 +1,32 @@
+
+<div *ngIf="submitted && deleteAirportIs " class="alert alert-success">
+  {{message}}
+</div>
+
+<div *ngIf="submitted && deleteAirportIs === false" class="alert alert-danger">
+  {{message}}
+</div>
+
+<div>
+
+  <p>Usuwanie lotniska: </p>
+
+  <div class="form-group">
+
+    <label>
+      <select [(ngModel)]='selected' class='form-control'>
+        <option [value]="0">Wybierz lotnisko do usunięcia</option>
+        <option *ngFor="let airport of airports" [value]="airport.id" >
+          Id: {{airport.id}}, Name: {{airport.name}}, Kraj: {{airport.nameCountry}}</option>
+      </select>
+    </label>
+
+  </div>
+
+  <div class="form-group">
+    <button class="btn btn-danger" (click)="deleteAirport()">Usuń lotnisko</button>
+  </div>
+
+</div>
+
+
