@@ -1,0 +1,136 @@
+<div *ngIf="submitted && messageIs " class="alert alert-success">
+  {{message}}
+</div>
+
+<div *ngIf="submitted && messageIs === false" class="alert alert-danger">
+  {{message}}
+</div>
+
+
+<form [formGroup]="dynamicForm" (ngSubmit)="onSubmit()">
+  <p>Dodawanie lotu:</p>
+
+  <div class="form-group">
+    <label> Typ lotu:
+      <select formControlName="selectedType" (ngModelChange)="onChangeType($event)" class='form-control'
+              [ngClass]="{ 'is-invalid': submitted && f.selectedType.errors }">
+        <option value="personal">OSOBOWY</option>
+        <option value="cargo">TOWAROWY</option>
+      </select>
+      <div *ngIf="submitted && f.selectedType.errors" class="invalid-feedback">
+        <div *ngIf="f.selectedType.errors.required"> Wybierz typ</div>
+      </div>
+    </label>
+  </div>
+
+
+  <div *ngFor="let flight of formFlight.controls">
+    <div *ngIf="this.f.selectedType.value === 'personal' || this.f.selectedType.value === 'cargo'">
+      <div [formGroup]="flight">
+
+        <div class="form-group">
+          <label> Lotnisko początkowe:
+            <select formControlName="startAirport" class='form-control' [ngClass]="{ 'is-invalid':submitted && flight.controls.startAirport.errors}">
+              <option *ngFor=" let airport of airports" [value]="airport.id"> {{airport.id}}, {{airport.nameCountry}}
+                , {{airport.name}} </option>
+            </select>
+            <div *ngIf="submitted && flight.controls.startAirport.errors" class="invalid-feedback">
+              <div *ngIf="flight.controls.startAirport.errors.required">Lotnisko poczatkowe jest niewybrane</div>
+            </div>
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label> Lotnisko koncowe:
+            <select formControlName="endAirport" class='form-control' [ngClass]="{ 'is-invalid':submitted && flight.controls.endAirport.errors}">
+              <option *ngFor=" let airport of airports" [value]="airport.id"> {{airport.id}}, {{airport.nameCountry}}
+                , {{airport.name}} </option>
+            </select>
+            <div *ngIf="submitted && flight.controls.endAirport.errors" class="invalid-feedback">
+              <div *ngIf="flight.controls.endAirport.errors.required">Lotnisko końcowe jest niewybrane</div>
+            </div>
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label>Godzina odlotu:
+            <input type="time" formControlName="timeStart" class="form-control"
+                   [ngClass]="{ 'is-invalid':submitted && flight.controls.timeStart.errors}"/>
+            <div *ngIf="submitted && flight.controls.timeStart.errors" class="invalid-feedback">
+              <div *ngIf="flight.controls.timeStart.errors.required">Godzina odlotu jest pusta</div>
+            </div>
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label>Czas trwania lotu (minuty):
+            <input type="number" min="0" formControlName="durationTimeMinutes" class="form-control"
+                   [ngClass]="{ 'is-invalid':submitted && flight.controls.durationTimeMinutes.errors}"/>
+            <div *ngIf="submitted && flight.controls.durationTimeMinutes.errors" class="invalid-feedback">
+              <div *ngIf="flight.controls.durationTimeMinutes.errors.required">Czas trwania lotu jest pusty</div>
+            </div>
+          </label>
+        </div>
+
+
+        <div *ngIf="this.f.selectedType.value === 'personal'">
+          <div class="form-group">
+            <label>Cena za jedno miejsce:
+              <input type="number" min="0" step="0.25" formControlName="priceForOnePlace" class="form-control"
+                     [ngClass]="{ 'is-invalid':submitted && flight.controls.priceForOnePlace.errors}"/>
+              <div *ngIf="submitted && flight.controls.priceForOnePlace.errors" class="invalid-feedback">
+                <div *ngIf="flight.controls.priceForOnePlace.errors.required">Cena za jedno miejsce jest pusty
+                </div>
+              </div>
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label>Maksymalna waga bagażu dla jednej osoby:
+              <input type="number" min="0" step="0.25" formControlName="maxWightBaggageForOnePerson"
+                     class="form-control"
+                     [ngClass]="{ 'is-invalid':submitted && flight.controls.maxWightBaggageForOnePerson.errors}"/>
+              <div *ngIf="submitted && flight.controls.maxWightBaggageForOnePerson.errors" class="invalid-feedback">
+                <div *ngIf="flight.controls.maxWightBaggageForOnePerson.errors.required">Max waga bagazu dla
+                  jednej osoby jest pusty
+                </div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div *ngIf="this.f.selectedType.value === 'cargo'">
+          <div class="form-group">
+            <label>Koszt stały:
+              <input type="number" min="0" step="0.25" formControlName="feeConst" class="form-control"
+                     [ngClass]="{ 'is-invalid':submitted && flight.controls.feeConst.errors}"/>
+              <div *ngIf="submitted && flight.controls.feeConst.errors" class="invalid-feedback">
+                <div *ngIf="flight.controls.feeConst.errors.required">Koszt staly jest pusty</div>
+              </div>
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label>Koszt za kilogram bagażu:
+              <input type="number" min="0" step="0.25" formControlName="feeForKiloPack" class="form-control" [ngClass]="{ 'is-invalid':submitted && flight.controls.feeForKiloPack.errors}"/>
+              <div *ngIf="submitted && flight.controls.feeForKiloPack.errors" class="invalid-feedback">
+                <div *ngIf="flight.controls.feeForKiloPack.errors.required">Lotnisko poczatkowe jest niewybrane</div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <button class="btn btn-primary">Dodaj lot</button>
+  </div>
+
+  <div class="form-group">
+    <a routerLink="/"> Powrot do strony głównej </a>
+  </div>
+
+</form>

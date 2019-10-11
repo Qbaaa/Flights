@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {AirportComponent} from "./airport/airport.component";
 import {DeleteairportComponent} from "./deleteairport/deleteairport.component";
+import {AddflightComponent} from "./addflight/addflight.component";
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'deleteairport',
     component: DeleteairportComponent
+  },
+  {
+    path: 'addflight',
+    component: AddflightComponent
   },
 ];
 

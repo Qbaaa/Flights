@@ -10,89 +10,72 @@ public abstract class Flight
 {
     @Id
     @GeneratedValue(strategy=GenerationType.TABLE)
-    protected long id;
+    protected Long id;
     protected TypeFlight type;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinTable(name = "flights_startairport",
-            joinColumns = {@JoinColumn(name = "start_airport_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "aiportId", referencedColumnName = "id", insertable = false, updatable = false)})
-    protected Airport startAirport;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinTable(name = "flights_endairport",
-            joinColumns = {@JoinColumn(name = "end_airport_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "aiportId", referencedColumnName = "id", insertable = false, updatable = false)})
-    protected Airport endAirport;
+    @OneToOne
+    @JoinColumn(name = "id_start_airport")
+    protected Airport start;
+
+    @OneToOne
+    @JoinColumn(name = "id_end_airport")
+    protected Airport end;
+
     protected LocalTime startTime;
-    protected int durationTimeMinutes;
+    protected Long durationTimeMinutes;
 
 
     public Flight() {}
 
-    public Flight(long id, TypeFlight type, Airport startAirport, Airport endAirport, LocalTime startTime, int durationTimeMinutes) {
-        this.id = id;
+    public Flight(TypeFlight type, Airport startAirport, Airport endAirport, LocalTime startTime, Long durationTimeMinutes) {
         this.type = type;
-        this.startAirport = startAirport;
-        this.endAirport = endAirport;
+        this.start = startAirport;
+        this.end = endAirport;
         this.startTime = startTime;
         this.durationTimeMinutes = durationTimeMinutes;
     }
 
+    public Long getId() { return id; }
 
-    public long getId() {
-        return id;
-    }
+    public TypeFlight getType() { return type; }
 
-    public TypeFlight getType() {
-        return type;
-    }
+    public Airport getStartAirport() { return start; }
 
-    public Airport getStartAirport() {
-        return startAirport;
-    }
+    public Airport getEndAirport() { return end; }
 
-    public Airport getEndAirport() {
-        return endAirport;
-    }
+    public LocalTime getStartTime() { return startTime; }
 
-    public LocalTime getStartTime() {
-        return startTime;
-    }
+    public Long getDurationTimeMinutes() { return durationTimeMinutes; }
 
-    public int getDurationTimeMinutes() {
-        return durationTimeMinutes;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
+    public void setId(Long id) { this.id = id; }
 
     public void setType(TypeFlight type) {
         this.type = type;
     }
 
     public void setStartAirport(Airport startAirport) {
-        this.startAirport = startAirport;
+        this.start = startAirport;
     }
 
     public void setEndAirport(Airport endAirport) {
-        this.endAirport = endAirport;
+        this.end = endAirport;
     }
 
     public void setStartTime(LocalTime startTime) {
         this.startTime = startTime;
     }
 
-    public void setDurationTimeMinutes(int durationTimeMinutes) {
+    public void setDurationTimeMinutes(Long durationTimeMinutes) {
         this.durationTimeMinutes = durationTimeMinutes;
     }
+
 
     @Override
     public String toString() {
         return "type=" + type +
-                ", startAirport=" + startAirport +
-                ", endAirport=" + endAirport +
+                ", startAirport=" + start +
+                ", endAirport=" + end +
                 ", startTime=" + startTime +
                 ", durationTimeMinutes=" + durationTimeMinutes ;
     }

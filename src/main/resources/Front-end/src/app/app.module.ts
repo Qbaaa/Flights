@@ -7,19 +7,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AirportComponent } from './airport/airport.component';
 import { DeleteairportComponent } from './deleteairport/deleteairport.component';
+import { AddflightComponent } from './addflight/addflight.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AirportComponent,
     DeleteairportComponent,
+    AddflightComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

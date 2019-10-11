@@ -8,21 +8,29 @@ public class Airport
 {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String name;
     private String nameCountry;
 
-//    @OneToOne(mappedBy = "startAirport")
-//    private Flight start;
-//
-//    @OneToOne(mappedBy = "endAirport")
-//    private Flight end;
+    @OneToOne(mappedBy = "start")
+    private Flight startA;
 
-    public long getId() {
+    @OneToOne(mappedBy = "end")
+    private Flight endA;
+
+
+    public Airport() { }
+
+    public Airport(String name, String nameCountry) {
+        this.name = name;
+        this.nameCountry = nameCountry;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -42,17 +50,26 @@ public class Airport
         this.nameCountry = nameCountry;
     }
 
-//    public Flight getStart() {
-//        return start;
-//    }
-//
-//    public void setStart(Flight start) {
-//        this.start = start;
-//    }
+    public Flight getStartA() {
+        return startA;
+    }
+
+    public void setStartA(Flight startA) {
+        this.startA = startA;
+    }
+
+    public Flight getEndA() {
+        return endA;
+    }
+
+    public void setEndA(Flight endA) {
+        this.endA = endA;
+    }
 
     @Override
     public String toString() {
         return "Airport{" +
+                "  id= ' " + id + '\'' +
                 "  name='" + name + '\'' +
                 ", nameCountry='" + nameCountry + '\'' +
                 '}';

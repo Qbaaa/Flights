@@ -1,8 +1,11 @@
 package com.qbaaa.flights.Controller;
 
 
-import com.qbaaa.flights.Model.Airport;
+import com.qbaaa.flights.Model.*;
 import com.qbaaa.flights.Repository.AirportRepository;
+import com.qbaaa.flights.Repository.FlightCargoRepository;
+import com.qbaaa.flights.Repository.FlightPersonalRepository;
+import com.qbaaa.flights.Request.FlightForm;
 import com.qbaaa.flights.Response.MessageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +20,12 @@ public class QuestionFlightController
 {
     @Autowired
     AirportRepository airportRepository;
+
+    @Autowired
+    FlightPersonalRepository flightPersonalRepository;
+
+    @Autowired
+    FlightCargoRepository flightCargoRepository;
 
     @PostMapping("/addAirport")
     public ResponseEntity<?> addAirport(@RequestBody Airport addAirport)
@@ -56,6 +65,25 @@ public class QuestionFlightController
         airportRepository.delete(delAirport);
 
         return new ResponseEntity<>(new MessageResponse("Usuniecie lotniska przebiegło pomyślnie."),HttpStatus.OK);
+    }
+
+    @PostMapping("/addFlight")
+    public ResponseEntity<?> addFlight(@RequestBody FlightForm form)
+    {
+        Airport start = airportRepository.findById(form.getStartAirport()).orElseThrow(() -> new RuntimeException("Blad lotniska startowego !"));
+        Airport end = airportRepository.findById(form.getEndAirport()).orElseThrow(() -> new RuntimeException("Blad lotniska koncowego !"));
+
+        if (form.getType().equals("personal"))
+        {
+            flightPersonalRepository.save(new FlightPersonal(start, end, form.getTimeStart(), form.getDurationTimeMinutes(), form.getPriceForOnePlace(), form.getMaxWightBaggageForOnePerson()));
+        }
+        else
+        {
+            flightCargoRepository.save(new FlightCargo(start, end, form.getTimeStart(), form.getDurationTimeMinutes(), form.getFeeConst(), form.getFeeForKiloPack()));
+            System.out.println(new FlightCargo(start, end, form.getTimeStart(), form.getDurationTimeMinutes(), form.getFeeConst(), form.getFeeForKiloPack()));
+        }
+
+        return new ResponseEntity<>(new MessageResponse("Dodano pomyslnie lot."),HttpStatus.OK);
     }
 
 }

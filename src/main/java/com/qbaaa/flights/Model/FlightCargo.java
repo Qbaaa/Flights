@@ -11,8 +11,8 @@ public class FlightCargo extends Flight {
 
     public FlightCargo() {}
 
-    public FlightCargo(long id, Airport startAirport, Airport endAirport, LocalTime startTime, int durationTimeMinutes, double feeConst, double feeForKiloPack) {
-        super(id, TypeFlight.cargo, startAirport, endAirport, startTime, durationTimeMinutes);
+    public FlightCargo(Airport startAirport, Airport endAirport, LocalTime startTime, Long durationTimeMinutes, double feeConst, double feeForKiloPack) {
+        super(TypeFlight.cargo, startAirport, endAirport, startTime, durationTimeMinutes);
         this.feeConst = feeConst;
         this.feeForKiloPack = feeForKiloPack;
     }
@@ -37,7 +37,7 @@ public class FlightCargo extends Flight {
     public String toString() {
         return "FlightCargo{" +
                 super.toString() +
-                "feeConst=" + feeConst +
+                " ,feeConst=" + feeConst +
                 ", feeForKiloPack=" + feeForKiloPack +
                 '}';
     }

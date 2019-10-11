@@ -13,25 +13,31 @@ const httpOptions = {
 })
 export class FlightsService {
 
-  private airportUrl = 'http://localhost:8080/addAirport';
-  private airportUrl2 = 'http://localhost:8080/deleteAirport';
-  private airportUrl3 = 'http://localhost:8080/getAirport';
+  private airportUrlAddAirport = 'http://localhost:8080/addAirport';
+  private airportUrlDeleteAirport = 'http://localhost:8080/deleteAirport';
+  private airportUrlGetAirport = 'http://localhost:8080/getAirport';
+  private airportUrlAddFlight = 'http://localhost:8080/addFlight';
 
   constructor(private http: HttpClient) { }
 
   addAirport(addAirport: Airport) : Observable<ResponseMessage>
   {
-   return this.http.post<ResponseMessage>(this.airportUrl, addAirport , httpOptions);
+   return this.http.post<ResponseMessage>(this.airportUrlAddAirport, addAirport , httpOptions);
   }
 
   deleteAirport(id: number) : Observable<ResponseMessage>
   {
-    return this.http.delete<ResponseMessage>(`${this.airportUrl2}/${id}`, httpOptions);
+    return this.http.delete<ResponseMessage>(`${this.airportUrlDeleteAirport}/${id}`, httpOptions);
   }
 
   getAirport() : Observable<Airport[]>
   {
-    return this.http.get<Airport[]>(this.airportUrl3, httpOptions);
+    return this.http.get<Airport[]>(this.airportUrlGetAirport, httpOptions);
+  }
+
+  addFlight(addFlight: any) : Observable<ResponseMessage>
+  {
+    return this.http.post<ResponseMessage>(this.airportUrlAddFlight, addFlight, httpOptions);
   }
 
 }

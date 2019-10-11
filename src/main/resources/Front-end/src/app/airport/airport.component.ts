@@ -41,7 +41,6 @@ export class AirportComponent implements OnInit {
       data =>{
         this.messageIs = true;
         this.message = data.message;
-        window.alert(this.message);
       },
       error => {
         this.messageIs = false;

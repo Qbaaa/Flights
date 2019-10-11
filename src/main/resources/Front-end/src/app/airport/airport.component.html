@@ -13,20 +13,22 @@
 
     <div class="form-group">
       <label >Nazwa lotniska:
-        <input type="text" class="form-control" formControlName="name" [ngClass]="{ 'is-invalid':submitted && f.name.errors }" />
+        <input type="text" class="form-control" formControlName="name" [ngClass]="{ 'is-invalid':submitted && f.name.errors }"/>
+        <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+          <div *ngIf="f.name.errors.required">Nazwa lotniska jest pusta</div>
+        </div>
       </label>
-      <div *ngIf="f.name.errors" class="invalid-feedback">
-        <div *ngIf="f.name.errors.required">Nazwa lotniska jest pusta</div>
-      </div>
+
     </div>
 
     <div class="form-group">
       <label>Kraj:
         <input type="text" class="form-control" formControlName="nameCountry" [ngClass]="{ 'is-invalid':submitted && f.nameCountry.errors }"/>
+        <div *ngIf="submitted && f.nameCountry.errors" class="invalid-feedback">
+          <div *ngIf="f.nameCountry.errors.required">Nazwa kraju jest pusta</div>
+        </div>
       </label>
-      <div *ngIf="f.nameCountry.errors" class="invalid-feedback">
-        <div *ngIf="f.nameCountry.errors.required">Nazwa kraju jest pusta</div>
-      </div>
+
     </div>
 
     <div class="form-group">
