@@ -12,6 +12,7 @@ import { DeleteFlightComponent } from './delete-flight/delete-flight.component';
 import { AllAirportNameCountryComponent } from './all-airport-name-country/all-airport-name-country.component';
 import { AllFlightWithSelectedAirportStartSortedTimeStartComponent } from './all-flight-with-selected-airport-start-sorted-time-start/all-flight-with-selected-airport-start-sorted-time-start.component';
 import { AllFlightWithSelectedAirportEndSortedTimeEndComponent } from './all-flight-with-selected-airport-end-sorted-time-end/all-flight-with-selected-airport-end-sorted-time-end.component';
+import { AllDBSortetAirportStartComponent } from './all-dbsortet-airport-start/all-dbsortet-airport-start.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { AllFlightWithSelectedAirportEndSortedTimeEndComponent } from './all-fli
     AllAirportNameCountryComponent,
     AllFlightWithSelectedAirportStartSortedTimeStartComponent,
     AllFlightWithSelectedAirportEndSortedTimeEndComponent,
+    AllDBSortetAirportStartComponent,
   ],
   imports: [
     BrowserModule,

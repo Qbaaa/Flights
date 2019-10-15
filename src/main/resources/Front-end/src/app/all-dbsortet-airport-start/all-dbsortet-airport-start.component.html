@@ -1,0 +1,33 @@
+
+<div *ngIf="listAiportIsEmpty; else NotEmpty" class="alert alert-success">
+  {{message}}
+</div>
+
+<ng-template #NotEmpty>
+
+  <div class="container">
+    <h2>Cała Baza posortowana wg Lotnisk początkowych:</h2>
+    <ul class="list-group">
+
+      <div *ngFor="let airport of airports">
+        <h3>ID:{{airport.id}}; Miasto:{{airport.name}}; Kraj:{{airport.nameCountry}}</h3>
+        <div *ngFor="let flight of flights" >
+          <div *ngIf="airport.id === flight.start.id">
+            <div *ngIf="flight.type === 'personal'" class="list-group-item">
+              ID: {{flight.id}}, Typ lotu: {{flight.type}}; Godzina odlotu {{flight.startTime}};
+              Czas lotu: {{flight.durationTimeMinutes}};  Cena za jedno miejsce:{{flight.priceForOnePlace}}; MAX bagaz dla jednej osoby:{{flight.maxWightBaggageForOnePerson}};
+              <b>Lotnisko pocztkowe</b>: [Miasto:{{flight.start.name}}, Kraj:{{flight.start.nameCountry}}]; Lotnisko koncowe: [Miasto:{{flight.end.name}}, Kraj:{{flight.end.nameCountry}}];
+            </div>
+            <div *ngIf="flight.type === 'cargo'" class="list-group-item">
+              ID: {{flight.id}}, Typ lotu: {{flight.type}}; Godzina odlotu {{flight.startTime}};
+              Czas lotu: {{flight.durationTimeMinutes}}; Stały koszt: {{flight.feeConst}}; Koszt za kilo paczki: {{flight.feeForKiloPack}};
+              <b>Lotnisko pocztkowe</b>: [Miasto:{{flight.start.name}}, Kraj:{{flight.start.nameCountry}}]; Lotnisko koncowe: [Miasto:{{flight.end.name}}, Kraj:{{flight.end.nameCountry}}];
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </ul>
+  </div>
+</ng-template>

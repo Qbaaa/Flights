@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin(origins = "*")
@@ -162,6 +164,26 @@ public class QuestionFlightController
         list.sort(new FlightTimeEndComparator());
 
         return new ResponseEntity<>(list ,HttpStatus.OK);
+    }
+
+    @GetMapping("/getAllDB")
+    public ResponseEntity<?> getAllDB()
+    {
+        List<Airport> listAllA = airportRepository.findAll();
+
+        if (listAllA.isEmpty())
+            return new ResponseEntity<>(new MessageResponse("Brak danych w bazie !!!"), HttpStatus.BAD_REQUEST);
+
+        listAllA.sort(new AirportNameCountryComparator());
+
+        List<Flight> listAllF = new ArrayList<>();
+
+        for (Airport ele: listAllA)
+        {
+            listAllF.addAll(ele.getStartA());
+        }
+
+        return new ResponseEntity<>(listAllF, HttpStatus.OK);
     }
 
 }
