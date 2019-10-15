@@ -1,0 +1,16 @@
+
+<div *ngIf="listAiportIsEmpty; else NotEmpty" class="alert alert-success">
+{{message}}
+</div>
+
+<ng-template #NotEmpty>
+
+  <div class="container">
+    <h2>Lista Lotnisk posortowane wg krajów:</h2>
+    <ul class="list-group">
+      <li *ngFor="let airport of airports" class="list-group-item">
+        ID:{{airport.id}}; Miasto:{{airport.name}}; Kraj:<b>{{airport.nameCountry}}</b>
+      </li>
+    </ul>
+  </div>
+</ng-template>

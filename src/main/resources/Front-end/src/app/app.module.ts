@@ -9,6 +9,7 @@ import { AirportComponent } from './airport/airport.component';
 import { DeleteairportComponent } from './deleteairport/deleteairport.component';
 import { AddflightComponent } from './addflight/addflight.component';
 import { DeleteFlightComponent } from './delete-flight/delete-flight.component';
+import { AllAirportNameCountryComponent } from './all-airport-name-country/all-airport-name-country.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { DeleteFlightComponent } from './delete-flight/delete-flight.component';
     DeleteairportComponent,
     AddflightComponent,
     DeleteFlightComponent,
+    AllAirportNameCountryComponent,
   ],
   imports: [
     BrowserModule,

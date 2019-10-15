@@ -20,6 +20,7 @@ export class FlightsService {
   private UrlAddFlight = 'http://localhost:8080/addFlight';
   private UrlDeleteFlight = 'http://localhost:8080/deleteFlight';
   private UrlGetFlight = 'http://localhost:8080/getFlight';
+  private UrlGetAirportSortedNameCountry = 'http://localhost:8080/getAirportSortedNameCountry';
 
   constructor(private http: HttpClient) { }
 
@@ -51,6 +52,11 @@ export class FlightsService {
   getFlight(): Observable<Flight[]>
   {
     return this.http.get<Flight[]>(this.UrlGetFlight,httpOptions);
+  }
+
+  getAiportSortedNameCountry(): Observable<Airport[]>
+  {
+    return this.http.get<Airport[]>(this.UrlGetAirportSortedNameCountry, httpOptions);
   }
 
 }

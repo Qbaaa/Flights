@@ -8,6 +8,7 @@ import com.qbaaa.flights.Repository.FlightPersonalRepository;
 import com.qbaaa.flights.Repository.FlightRepository;
 import com.qbaaa.flights.Request.FlightForm;
 import com.qbaaa.flights.Response.MessageResponse;
+import com.qbaaa.flights.Service.AirportNameCountryComparator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -112,6 +113,19 @@ public class QuestionFlightController
         flightRepository.delete(del);
 
         return new ResponseEntity<>(new MessageResponse("Usuniecie lotu przebiegło pomyślnie."),HttpStatus.OK);
+    }
+
+    @GetMapping("/getAirportSortedNameCountry")
+    public ResponseEntity<?> getAiportSortedNameCountry()
+    {
+        List<Airport> list = airportRepository.findAll();
+
+        if(list.isEmpty())
+            return new ResponseEntity<>(new MessageResponse("Brak Lotnisk do wyswietlenia !!!"), HttpStatus.BAD_REQUEST);
+
+        list.sort(new AirportNameCountryComparator());
+
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
 }

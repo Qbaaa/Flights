@@ -8,11 +8,15 @@ import com.qbaaa.flights.Repository.AirportRepository;
 import com.qbaaa.flights.Repository.FlightCargoRepository;
 import com.qbaaa.flights.Repository.FlightPersonalRepository;
 import com.qbaaa.flights.Repository.FlightRepository;
+import com.qbaaa.flights.Service.AirportNameCountryComparator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalTime;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 @Component
 public class Starter implements CommandLineRunner
@@ -53,8 +57,6 @@ public class Starter implements CommandLineRunner
         flightCargoRepository.save(new FlightCargo(a1,a2,LocalTime.now().plusHours(10),new Long("25"), 150, 15));
         flightPersonalRepository.save(new FlightPersonal(a3,a5,LocalTime.of(15,45),new Long("60"), 150, 15));
         flightPersonalRepository.save(new FlightPersonal(a15,a4,LocalTime.of(16,45),new Long("70"), 160, 20));
-
-        System.out.println(airportRepository.findById(new Long("2")));
 
     }
 }

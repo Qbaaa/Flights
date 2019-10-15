@@ -4,13 +4,13 @@ import {AirportComponent} from "./airport/airport.component";
 import {DeleteairportComponent} from "./deleteairport/deleteairport.component";
 import {AddflightComponent} from "./addflight/addflight.component";
 import {DeleteFlightComponent} from "./delete-flight/delete-flight.component";
+import {AllAirportNameCountryComponent} from "./all-airport-name-country/all-airport-name-country.component";
 
 const routes: Routes = [
   {
     path: 'airport',
     component: AirportComponent
   },
-
   {
     path: 'deleteairport',
     component: DeleteairportComponent
@@ -22,6 +22,10 @@ const routes: Routes = [
   {
     path: 'deleteflight',
     component: DeleteFlightComponent
+  },
+  {
+    path: 'allAirportSortNameCountry',
+    component: AllAirportNameCountryComponent
   },
   {
     path: '',
