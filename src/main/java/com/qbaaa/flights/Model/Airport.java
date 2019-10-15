@@ -1,6 +1,10 @@
 package com.qbaaa.flights.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "airport")
@@ -12,12 +16,13 @@ public class Airport
     private String name;
     private String nameCountry;
 
-    @OneToOne(mappedBy = "start")
-    private Flight startA;
+    @JsonIgnore
+    @OneToMany(mappedBy = "start")
+    private List<Flight> startA = new ArrayList<>();
 
-    @OneToOne(mappedBy = "end")
-    private Flight endA;
-
+    @JsonIgnore
+    @OneToMany(mappedBy = "end")
+    private List<Flight> endA = new ArrayList<>();
 
     public Airport() { }
 
@@ -25,6 +30,17 @@ public class Airport
         this.name = name;
         this.nameCountry = nameCountry;
     }
+
+    public void addFlightStart(Flight flight)
+    {
+        startA.add(flight);
+    }
+
+    public void addFlightEnd(Flight flight) { endA.add(flight); }
+
+    public void removeFlightStart(Flight flight) { startA.remove(flight); }
+
+    public void removeFlightEnd(Flight flight) { endA.remove(flight);}
 
     public Long getId() {
         return id;
@@ -50,27 +66,19 @@ public class Airport
         this.nameCountry = nameCountry;
     }
 
-    public Flight getStartA() {
-        return startA;
-    }
+    public List<Flight> getStartA() { return startA; }
 
-    public void setStartA(Flight startA) {
-        this.startA = startA;
-    }
+    public void setStartA(List<Flight> startA) { this.startA = startA; }
 
-    public Flight getEndA() {
-        return endA;
-    }
+    public List<Flight> getEndA() { return endA; }
 
-    public void setEndA(Flight endA) {
-        this.endA = endA;
-    }
+    public void setEndA(List<Flight> endA) { this.endA = endA; }
 
     @Override
     public String toString() {
         return "Airport{" +
-                "  id= ' " + id + '\'' +
-                "  name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", nameCountry='" + nameCountry + '\'' +
                 '}';
     }

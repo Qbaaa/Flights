@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Airport} from "./class/airport";
 import {ResponseMessage} from "./class/ResponseMessage";
+import {Flight} from "./class/flight";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -13,31 +14,43 @@ const httpOptions = {
 })
 export class FlightsService {
 
-  private airportUrlAddAirport = 'http://localhost:8080/addAirport';
-  private airportUrlDeleteAirport = 'http://localhost:8080/deleteAirport';
-  private airportUrlGetAirport = 'http://localhost:8080/getAirport';
-  private airportUrlAddFlight = 'http://localhost:8080/addFlight';
+  private UrlAddAirport = 'http://localhost:8080/addAirport';
+  private UrlDeleteAirport = 'http://localhost:8080/deleteAirport';
+  private UrlGetAirport = 'http://localhost:8080/getAirport';
+  private UrlAddFlight = 'http://localhost:8080/addFlight';
+  private UrlDeleteFlight = 'http://localhost:8080/deleteFlight';
+  private UrlGetFlight = 'http://localhost:8080/getFlight';
 
   constructor(private http: HttpClient) { }
 
   addAirport(addAirport: Airport) : Observable<ResponseMessage>
   {
-   return this.http.post<ResponseMessage>(this.airportUrlAddAirport, addAirport , httpOptions);
+   return this.http.post<ResponseMessage>(this.UrlAddAirport, addAirport , httpOptions);
   }
 
   deleteAirport(id: number) : Observable<ResponseMessage>
   {
-    return this.http.delete<ResponseMessage>(`${this.airportUrlDeleteAirport}/${id}`, httpOptions);
+    return this.http.delete<ResponseMessage>(`${this.UrlDeleteAirport}/${id}`, httpOptions);
   }
 
   getAirport() : Observable<Airport[]>
   {
-    return this.http.get<Airport[]>(this.airportUrlGetAirport, httpOptions);
+    return this.http.get<Airport[]>(this.UrlGetAirport, httpOptions);
   }
 
   addFlight(addFlight: any) : Observable<ResponseMessage>
   {
-    return this.http.post<ResponseMessage>(this.airportUrlAddFlight, addFlight, httpOptions);
+    return this.http.post<ResponseMessage>(this.UrlAddFlight, addFlight, httpOptions);
+  }
+
+  deleteFlight(id: number) : Observable<ResponseMessage>
+  {
+    return this.http.delete<ResponseMessage>(`${this.UrlDeleteFlight}/${id}`, httpOptions);
+  }
+
+  getFlight(): Observable<Flight[]>
+  {
+    return this.http.get<Flight[]>(this.UrlGetFlight,httpOptions);
   }
 
 }

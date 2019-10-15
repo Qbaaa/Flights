@@ -13,14 +13,13 @@ public abstract class Flight
     protected Long id;
     protected TypeFlight type;
 
-
-    @OneToOne
-    @JoinColumn(name = "id_start_airport")
+    @ManyToOne
+    @JoinColumn(name = "start_airport_id")
     protected Airport start;
 
-    @OneToOne
-    @JoinColumn(name = "id_end_airport")
-    protected Airport end;
+    @ManyToOne
+    @JoinColumn(name = "end_airport_id")
+    protected Airport end ;
 
     protected LocalTime startTime;
     protected Long durationTimeMinutes;
@@ -40,10 +39,6 @@ public abstract class Flight
 
     public TypeFlight getType() { return type; }
 
-    public Airport getStartAirport() { return start; }
-
-    public Airport getEndAirport() { return end; }
-
     public LocalTime getStartTime() { return startTime; }
 
     public Long getDurationTimeMinutes() { return durationTimeMinutes; }
@@ -54,14 +49,6 @@ public abstract class Flight
         this.type = type;
     }
 
-    public void setStartAirport(Airport startAirport) {
-        this.start = startAirport;
-    }
-
-    public void setEndAirport(Airport endAirport) {
-        this.end = endAirport;
-    }
-
     public void setStartTime(LocalTime startTime) {
         this.startTime = startTime;
     }
@@ -70,6 +57,13 @@ public abstract class Flight
         this.durationTimeMinutes = durationTimeMinutes;
     }
 
+    public Airport getStart() { return start; }
+
+    public void setStart(Airport start) { this.start = start; }
+
+    public Airport getEnd() { return end; }
+
+    public void setEnd(Airport end) { this.end = end; }
 
     @Override
     public String toString() {

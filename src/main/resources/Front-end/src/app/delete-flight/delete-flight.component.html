@@ -1,0 +1,44 @@
+<div *ngIf="submitted && deleteFlightIs " class="alert alert-success">
+  {{message}}
+</div>
+
+<div *ngIf="submitted && deleteFlightIs === false" class="alert alert-danger">
+  {{message}}
+</div>
+
+<div *ngIf="!flightIsEmpty">
+
+  <p>Usuwanie lotu: </p>
+
+  <div class="form-group">
+
+    <label>
+      <select [(ngModel)]='selected' class='form-control'>
+        <option [value]="0">Wybierz lot do usunięcia</option>
+        <option *ngFor="let flight of flights" [value]="flight.id">
+          <div *ngIf="flight.type === 'personal'">
+            Id: {{flight.id}}, Typ lotu: {{flight.type}}; Godzina odlotu {{flight.startTime}};
+            Czas lotu: {{flight.durationTimeMinutes}};  Cena za jedno miejsce:{{flight.priceForOnePlace}}; MAX bagaz dla jednej osoby:{{flight.maxWightBaggageForOnePerson}};
+            Lotnisko pocztkowe: [Miasto:{{flight.start.name}}, Kraj:{{flight.start.nameCountry}}]; Lotnisko koncowe: [Miasto:{{flight.end.name}}, Kraj:{{flight.end.nameCountry}}];
+          </div>
+          <div *ngIf="flight.type === 'cargo'">
+            Id: {{flight.id}}, Typ lotu: {{flight.type}}; Godzina odlotu {{flight.startTime}};
+            Czas lotu: {{flight.durationTimeMinutes}}; Stały koszt: {{flight.feeConst}}; Koszt za kilo paczki: {{flight.feeForKiloPack}};
+            Lotnisko pocztkowe: [Miasto:{{flight.start.name}}, Kraj:{{flight.start.nameCountry}}]; Lotnisko koncowe: [Miasto:{{flight.end.name}}, Kraj:{{flight.end.nameCountry}}];
+          </div>
+
+        </option>
+      </select>
+    </label>
+
+  </div>
+
+  <div class="form-group">
+    <button class="btn btn-danger" (click)="deleteFlight()">Usuń lot</button>
+  </div>
+
+</div>
+
+<div *ngIf="flightIsEmpty" class="alert alert-danger">
+  {{message}}
+</div>
