@@ -4,24 +4,24 @@
 
 <ng-template #NotEmpty>
 
-    <div class="form-group">
-      <label> Wybierz lotnisko:
-        <select [(ngModel)]='selected' class='form-control'>
-          <option *ngFor=" let airport of airports" [value]="airport.id">
-            {{airport.id}}, {{airport.nameCountry}}, {{airport.name}}
-          </option>
-        </select>
-      </label>
-    </div>
+  <div class="form-group">
+    <label> Wybierz lotnisko koncowe:
+      <select [(ngModel)]='selected' class='form-control'>
+        <option *ngFor=" let airport of airports" [value]="airport.id">
+          {{airport.id}}, {{airport.nameCountry}}, {{airport.name}}
+        </option>
+      </select>
+    </label>
+  </div>
 
-    <div class="form-group">
-      <button (click)="onSubmit()" class="btn btn-primary">Wyswietl z podanego lotniska</button>
-    </div>
+  <div class="form-group">
+    <button (click)="onSubmit()" class="btn btn-primary">Wyswietl z podanego lotniska</button>
+  </div>
 </ng-template>
 
 <div *ngIf="submited && messageIs">
   <div class="container">
-    <h4>Wszystkie loty z podanego przez użytkownika lotniska początkowego posortowanych wg godzin odlotu:</h4>
+    <h4>Wszystkie loty do podanego przez użytkownika lotniska końcowego posortowanych wg godzin przylotu:</h4>
     <ul class="list-group">
       <li *ngFor="let flight of flights" class="list-group-item">
         <div *ngIf="flight.type === 'personal'">
@@ -42,4 +42,3 @@
 <div *ngIf="submited && messageIs === false" class="alert alert-danger">
   {{message}}
 </div>
-

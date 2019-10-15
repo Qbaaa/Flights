@@ -22,6 +22,7 @@ export class FlightsService {
   private UrlGetFlight = 'http://localhost:8080/getFlight';
   private UrlGetAirportSortedNameCountry = 'http://localhost:8080/getAirportSortedNameCountry';
   private UrlGetAllFlightWithSelectedAirportStartSortedTimeStart = 'http://localhost:8080/getAllFlightWithSelectedAirportStartSortedTimeStart';
+  private UrlGetAllFlightWithSelectedAirportEndSortedTimeEnd = 'http://localhost:8080/getAllFlightWithSelectedAirportEndSortedTimeEnd';
 
   constructor(private http: HttpClient) { }
 
@@ -63,6 +64,11 @@ export class FlightsService {
   getAllFlightWithSelectedAirportStartSortedTimeStart(id: number) : Observable<Flight[]>
   {
     return this.http.get<Flight[]>(`${this.UrlGetAllFlightWithSelectedAirportStartSortedTimeStart}/${id}` , httpOptions);
+  }
+
+  getAllFlightWithSelectedAirportEndSortedTimeEnd(id: number) : Observable<Flight[]>
+  {
+    return this.http.get<Flight[]>(`${this.UrlGetAllFlightWithSelectedAirportEndSortedTimeEnd}/${id}` , httpOptions);
   }
 
 }

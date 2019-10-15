@@ -6,6 +6,7 @@ import {AddflightComponent} from "./addflight/addflight.component";
 import {DeleteFlightComponent} from "./delete-flight/delete-flight.component";
 import {AllAirportNameCountryComponent} from "./all-airport-name-country/all-airport-name-country.component";
 import {AllFlightWithSelectedAirportStartSortedTimeStartComponent} from "./all-flight-with-selected-airport-start-sorted-time-start/all-flight-with-selected-airport-start-sorted-time-start.component";
+import {AllFlightWithSelectedAirportEndSortedTimeEndComponent} from "./all-flight-with-selected-airport-end-sorted-time-end/all-flight-with-selected-airport-end-sorted-time-end.component";
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: 'allFlightWithSelectedAirportStartSortedTimeStart',
     component: AllFlightWithSelectedAirportStartSortedTimeStartComponent
+  },
+  {
+    path: 'allFlightWithSelectedAirportEndSortedTimeEnd',
+    component: AllFlightWithSelectedAirportEndSortedTimeEndComponent
   },
   {
     path: '',

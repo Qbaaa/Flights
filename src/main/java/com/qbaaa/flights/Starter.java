@@ -57,6 +57,9 @@ public class Starter implements CommandLineRunner
         flightCargoRepository.save(new FlightCargo(a1,a2,LocalTime.now().plusHours(10),new Long("25"), 150, 15));
         flightPersonalRepository.save(new FlightPersonal(a3,a5,LocalTime.of(15,45),new Long("60"), 150, 15));
         flightPersonalRepository.save(new FlightPersonal(a15,a4,LocalTime.of(16,45),new Long("70"), 160, 20));
-
+        flightCargoRepository.save(new FlightCargo(a3,a2,LocalTime.of(10,0),185L, 220, 50));
+        flightPersonalRepository.save(new FlightPersonal(a1,a4,LocalTime.of(21,31), 155L, 551, 30));
+        flightCargoRepository.save(new FlightCargo(a5,a4,LocalTime.of(2,15),311L, 345, 112));
+        flightCargoRepository.save(new FlightCargo(a3,a4,LocalTime.of(4,45),815L, 863, 1745));
     }
 }

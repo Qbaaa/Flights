@@ -9,6 +9,7 @@ import com.qbaaa.flights.Repository.FlightRepository;
 import com.qbaaa.flights.Request.FlightForm;
 import com.qbaaa.flights.Response.MessageResponse;
 import com.qbaaa.flights.Service.AirportNameCountryComparator;
+import com.qbaaa.flights.Service.FlightTimeEndComparator;
 import com.qbaaa.flights.Service.FlightTimeStartComparator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -142,6 +143,23 @@ public class QuestionFlightController
 
         List<Flight> list = start.getStartA();
         list.sort(new FlightTimeStartComparator());
+
+        return new ResponseEntity<>(list ,HttpStatus.OK);
+    }
+
+    @GetMapping("/getAllFlightWithSelectedAirportEndSortedTimeEnd/{id}")
+    public ResponseEntity<?> getAllFlightWithSelectedAirportEndSortedTimeEnd(@PathVariable Long id)
+    {
+        if (id == 0)
+            return new ResponseEntity<>(new MessageResponse("Nie wybrano żadnego lotniska !!!") ,HttpStatus.BAD_REQUEST);
+
+        Airport end = airportRepository.findById(id).orElseThrow(() -> new RuntimeException("Blad brak lotniska!"));
+
+        if (end.getEndA().isEmpty())
+            return new ResponseEntity<>(new MessageResponse("BRAK przylotów do podanego lotniska!!!") ,HttpStatus.BAD_REQUEST);
+
+        List<Flight> list = end.getEndA();
+        list.sort(new FlightTimeEndComparator());
 
         return new ResponseEntity<>(list ,HttpStatus.OK);
     }
