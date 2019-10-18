@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {Airport} from "./class/airport";
 import {ResponseMessage} from "./class/ResponseMessage";
 import {Flight} from "./class/flight";
+import {MinConnectBetweenTwoAirports} from "./class/MinConnectBetweenTwoAirports";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -24,6 +25,7 @@ export class FlightsService {
   private UrlGetAllFlightWithSelectedAirportStartSortedTimeStart = 'http://localhost:8080/getAllFlightWithSelectedAirportStartSortedTimeStart';
   private UrlGetAllFlightWithSelectedAirportEndSortedTimeEnd = 'http://localhost:8080/getAllFlightWithSelectedAirportEndSortedTimeEnd';
   private UrlGetAllDB = 'http://localhost:8080/getAllDB';
+  private UrlGetMinConnectAiports = 'http://localhost:8080/getMinConnectBetweenTwoAiports';
 
   constructor(private http: HttpClient) { }
 
@@ -77,4 +79,8 @@ export class FlightsService {
     return this.http.get<Flight[]>(this.UrlGetAllDB, httpOptions);
   }
 
+  getMinConnectTwoAiports(id_start:number, id_end:number):Observable<MinConnectBetweenTwoAirports>
+  {
+    return this.http.get<MinConnectBetweenTwoAirports>(`${this.UrlGetMinConnectAiports}/${id_start}/${id_end}`, httpOptions);
+  }
 }

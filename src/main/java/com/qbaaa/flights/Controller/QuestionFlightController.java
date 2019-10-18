@@ -8,7 +8,9 @@ import com.qbaaa.flights.Repository.FlightPersonalRepository;
 import com.qbaaa.flights.Repository.FlightRepository;
 import com.qbaaa.flights.Request.FlightForm;
 import com.qbaaa.flights.Response.MessageResponse;
+import com.qbaaa.flights.Response.MinConnectBetweenTwoAirportsResponse;
 import com.qbaaa.flights.Service.AirportNameCountryComparator;
+import com.qbaaa.flights.Service.FlightService;
 import com.qbaaa.flights.Service.FlightTimeEndComparator;
 import com.qbaaa.flights.Service.FlightTimeStartComparator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,9 @@ public class QuestionFlightController
 
     @Autowired
     FlightRepository flightRepository;
+
+    @Autowired
+    FlightService flightService;
 
     @PostMapping("/addAirport")
     public ResponseEntity<?> addAirport(@RequestBody Airport addAirport)
@@ -185,5 +190,23 @@ public class QuestionFlightController
 
         return new ResponseEntity<>(listAllF, HttpStatus.OK);
     }
+
+    @GetMapping("/getMinConnectBetweenTwoAiports/{id_start}/{id_end}")
+    public ResponseEntity<?> getMinConnectBetweenTwoAiports(@PathVariable("id_start")Long id_start,@PathVariable("id_end")Long id_end)
+    {
+        if (id_start.equals(id_end))
+            return new ResponseEntity<>(new MessageResponse("Lotniska nie moga byc tego samego wyboru!!!"), HttpStatus.BAD_REQUEST);
+
+
+        MinConnectBetweenTwoAirportsResponse information = flightService.minChangeBetweenAiports(id_start, id_end);
+
+        if(information == null)
+            return new ResponseEntity<>(new MessageResponse("Brak połączeia miedzy Lotnikskami "), HttpStatus.BAD_REQUEST);
+        else
+            return new ResponseEntity<>(information, HttpStatus.OK);
+
+    }
+
+
 
 }

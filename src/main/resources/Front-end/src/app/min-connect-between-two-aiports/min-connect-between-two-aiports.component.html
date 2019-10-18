@@ -1,0 +1,58 @@
+<div *ngIf="aiportsIsEmpty; else NotEmpty" class="alert alert-success">
+  {{message}}
+</div>
+
+<ng-template #NotEmpty>
+
+  <div class="form-group">
+    <label> Wybierz lotnisko startowe:
+      <select [(ngModel)]='id_start' class='form-control'>
+        <option *ngFor=" let airport of airports" [value]="airport.id">
+          {{airport.id}}, {{airport.nameCountry}}, {{airport.name}}
+        </option>
+      </select>
+    </label>
+  </div>
+
+  <div class="form-group">
+    <label> Wybierz lotnisko koncowe:
+      <select [(ngModel)]='id_end' class='form-control'>
+        <option *ngFor=" let airport of airports" [value]="airport.id">
+          {{airport.id}}, {{airport.nameCountry}}, {{airport.name}}
+        </option>
+      </select>
+    </label>
+  </div>
+
+  <div class="form-group">
+    <button (click)="onSubmit()" class="btn btn-primary">Wyswietl z podanego lotniska</button>
+  </div>
+</ng-template>
+
+<div *ngIf="submited && messageIs">
+  <div class="container">
+    <h4>Połączenia z minimalną liczbą przesiadek pomiędzy dwoma lotniskami:</h4>
+
+    Lista połaczeń miedzy dwoma lotniskami:
+    <ul class="list-group">
+      <li *ngFor="let flight of information.listConnect" class="list-group-item">
+        <div>
+          ID: {{flight.id}}, Typ lotu: {{flight.type}}; Godzina odlotu {{flight.startTime}};
+          Czas lotu: {{flight.durationTimeMinutes}};  Cena za jedno miejsce:{{flight.priceForOnePlace}};
+          MAX bagaz dla jednej osoby:{{flight.maxWightBaggageForOnePerson}};
+          Lotnisko pocztkowe: [Miasto:{{flight.start.name}}, Kraj:{{flight.start.nameCountry}}];
+          Lotnisko koncowe: [Miasto:{{flight.end.name}}, Kraj:{{flight.end.nameCountry}}];
+        </div>
+      </li>
+    </ul>
+
+    Ilosc przesiadek: {{information.amountChange}}<br>
+    Całkowita cena dla jednej osoby: {{information.sumPriceForOnePerson}}<br>
+    Maksymalny bagaz dla jednej osoby: {{information.maxBaggageForonePerson}}<br>
+
+  </div>
+</div>
+
+<div *ngIf="submited && messageIs === false" class="alert alert-danger">
+  {{message}}
+</div>
